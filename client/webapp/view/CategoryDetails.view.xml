@@ -1,0 +1,116 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.uxap"
+    xmlns:m="sap.m"
+    xmlns:core="sap.ui.core"
+    controllerName="pavel.kliuiko.controller.CategoryDetails"
+>
+    <ObjectPageLayout
+        showFooter="true"
+        upperCaseAnchorBar="false"
+    >
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <expandedHeading>
+                    <m:Title
+                        text="{appModel>title}"
+                        wrapping="true"
+                    />
+                </expandedHeading>
+                <snappedHeading>
+                    <m:Title
+                        text="{appModel>title}"
+                        wrapping="true"
+                    />
+                </snappedHeading>
+					<navigationActions>
+							<m:OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="onFullScreen"  tooltip="{i18n>FullScreenBtnTooltip}" visible="{stateModel>/categoryDetailsFullScreenBtn}"/>
+							<m:OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="onExitFullScreen" tooltip="ExitFullScreenBtnTooltip" visible="{= !${stateModel>/categoryDetailsFullScreenBtn}}"/>
+							<m:OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="onPageClose"  tooltip="{i18n>CloseMidColumnBtnTooltip}"/>
+						</navigationActions>
+                <actions>
+                    <m:Button
+                        text="{i18n>EditBtnText}"
+                        type="Emphasized"
+                        press="onOpenEditCategoryWizardPress"
+                    />
+                    <m:Button
+                        text="{i18n>DeleteBtnText}"
+                        press="onDeleteCurrentCategory"
+                    />
+                </actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+        <headerContent>
+            <m:FlexBox
+                wrap="Wrap"
+                fitContainer="true"
+            >
+                <m:Avatar
+                    src="{appModel>image}"
+                    displaySize="L"
+                    displayShape="Square"
+                    class="sapUiTinyMarginEnd"
+                />
+                <m:VBox
+                    justifyContent="Center"
+                    class="sapUiSmallMarginEnd"
+                >
+                    <m:Label
+                        showColon="true"
+                        text="{i18n>CategorySubtitleLabel}"
+                    />
+                    <m:Text text="{appModel>subtitle}" />
+                </m:VBox>
+                <m:VBox
+                    justifyContent="Center"
+                    class="sapUiSmallMarginEnd"
+                >
+                    <m:Label
+                        showColon="true"
+                        text="{i18n>CategoryCreatedDateLabel}"
+                    />
+                    <m:Text text="{appModel>createdDate}" />
+                </m:VBox>
+                <m:VBox
+                    justifyContent="Center"
+                    class="sapUiSmallMarginEnd"
+                >
+                    <m:Label
+                        showColon="true"
+                        text="{i18n>CategoryDescriptionLabel}"
+                    />
+                    <m:Text text="{appModel>description}" />
+                </m:VBox>
+            </m:FlexBox>
+        </headerContent>
+
+        <sections>
+            <ObjectPageSection
+                titleUppercase="false"
+                title="{i18n>SalesChartTabTitle}"
+            >
+                <subSections>
+                    <ObjectPageSubSection>
+                        <core:Fragment
+                            fragmentName="pavel.kliuiko.view.fragments.CategorySalesChart"
+                        />
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection
+                titleUppercase="false"
+                title="{i18n>BooksTabTitle}"
+            >
+                <subSections>
+                    <ObjectPageSubSection>
+                        <core:Fragment
+                            fragmentName="pavel.kliuiko.view.fragments.BooksTable"
+                        />
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
+</mvc:View>

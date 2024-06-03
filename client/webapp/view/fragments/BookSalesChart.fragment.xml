@@ -1,0 +1,23 @@
+<core:FragmentDefinition
+    xmlns="sap.suite.ui.microchart"
+    xmlns:m="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <m:VBox height="10rem" width="25rem" class="sapUiSmallMargin">
+        <m:Title text="{= ${appModel>sales}.length ? ${i18n>BookSalesChartTitle} : ${i18n>BookEmptySalesChartTitle}}" />
+        <InteractiveLineChart
+            selectionEnabled="false"
+            precedingPoint="10"
+            succeedingPoint="15"
+            busy="{stateModel>/busyIndicator}"
+            points="{appModel>sales}"
+        >
+            <points>
+                <InteractiveLineChartPoint
+                    value="{appModel>count}"
+                    label="{appModel>month}"
+                />
+            </points>
+        </InteractiveLineChart>
+    </m:VBox>
+</core:FragmentDefinition>

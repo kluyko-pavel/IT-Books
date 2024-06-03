@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+>
+    <form:SimpleForm
+        busy="{stateModel>/busyIndicator}"
+        maxContainerCols="3"
+        layout="ResponsiveGridLayout"
+		columnsL="3"
+		columnsM="3"
+		labelSpanXL="12"
+		emptySpanXL="2"
+		labelSpanL="12"
+		emptySpanL="0"
+		labelSpanM="12"
+		emptySpanM="0"
+    >
+        <form:content>
+        <Toolbar visible="false"/>
+            <Label text="{i18n>BookIsbnLabel}" />
+            <Text text="{appModel>isbn13}" />
+            <Label text="{i18n>BookPriceLabel}" />
+            <ObjectNumber
+                number="{appModel>price}"
+                unit="BYN"
+            />
+            <Label text="{i18n>BookAuthorsLabel}" />
+            <Text text="{appModel>authors}" />
+             <Toolbar visible="false"/>
+            <Label text="{i18n>BookPublisherLabel}" />
+            <Text text="{appModel>publisher}" />
+            <Label text="{i18n>BookPagesLabel}" />
+            <Text text="{appModel>pages}" />
+            <Label text="{i18n>BookDateLabel}" />
+            <Text text="{appModel>year}" />
+            <Toolbar visible="false"/>
+            <Label text="{i18n>BookRatingLabel}" />
+            <RatingIndicator
+                editable="false"
+                value="{appModel>rating}"
+            />
+        </form:content>
+    </form:SimpleForm>
+</core:FragmentDefinition>

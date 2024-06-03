@@ -1,0 +1,224 @@
+<mvc:View
+    height="100%"
+    controllerName="pavel.kliuiko.controller.CategoryWizard"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+>
+    <NavContainer id="wizardNavContainer">
+        <pages>
+            <Page
+                id="wizardContentPage"
+                showHeader="false"
+            >
+                <content>
+                    <Wizard
+                        id="CreateCategoryWizard"
+                        class="sapUiResponsivePadding--header sapUiResponsivePadding--content"
+                        complete="wizardCompletedHandler"
+                    >
+                        <WizardStep
+                            id="GeneralInfoStep"
+                            title="{i18n>WizardGenInfoStepTitle}"
+                            validated="{= ${stateModel>/editMode} ? true : false}"
+                            activate="onStepValidationCheck('newCategoryGenInfoInputs', 'GeneralInfoStep')"
+                        >
+                            <form:SimpleForm
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                            >
+                                <Label
+                                    text="{i18n>CategoryTitleLabel}"
+                                    required="true"
+                                />
+                                <Input
+                                    id="newCategoryNameInput"
+                                    fieldGroupIds="newCategoryGenInfoInputs"
+                                    liveChange="onStepValidationCheck('newCategoryGenInfoInputs', 'GeneralInfoStep')"
+                                    change="onInputChange"
+                                    value="{
+                                        path: 'appModel>title',
+                                        type: 'sap.ui.model.type.String',
+                                        constraints: {
+                                            minLength: 3,
+                                            maxLength: 40
+                                        }
+                                    }"
+                                />
+                                <Label
+                                    text="{i18n>CategorySubtitleLabel}"
+                                    required="true"
+                                />
+                                <Input
+                                    id="newCategorySubtitleInput"
+                                    fieldGroupIds="newCategoryGenInfoInputs"
+                                    liveChange="onStepValidationCheck('newCategoryGenInfoInputs', 'GeneralInfoStep')"
+                                    change="onInputChange"
+                                    value="{
+                                        path: 'appModel>subtitle',
+                                        type: 'sap.ui.model.type.String',
+                                        constraints: {
+                                            minLength: 3,
+                                            maxLength: 40
+                                        }
+                                    }"
+                                />
+                                <Label
+                                    text="{i18n>CategoryDescriptionLabel}"
+                                    required="true"
+                                />
+                                <TextArea
+                                    id="newCategoryDescriptionInput"
+                                    fieldGroupIds="newCategoryGenInfoInputs"
+                                    liveChange="onStepValidationCheck('newCategoryGenInfoInputs', 'GeneralInfoStep')"
+                                    change="onInputChange"
+                                    value="{
+                                        path: 'appModel>description',
+                                        type: 'sap.ui.model.type.String',
+                                        constraints: {
+                                            minLength: 3,
+                                            maxLength: 40
+                                        }
+                                    }"
+                                />
+                            </form:SimpleForm>
+                        </WizardStep>
+                        <WizardStep
+                            id="BooksInfoStep"
+                            title="{i18n>WizardBooksInfoStepTitle}"
+                        >
+                            <core:Fragment fragmentName="pavel.kliuiko.view.fragments.BooksTable" />
+                        </WizardStep>
+                        <WizardStep
+                            id="AdditionalInfoStep"
+                            title="{i18n>WizardAdditionalInfoStepTitle}"
+                        >
+                            <form:SimpleForm
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                            >
+                                <Label
+                                    text="{i18n>CategoryImageLabel}"
+                                />
+                                 <Input
+                                    id="newCategoryImageInput"
+                                    liveChange="onInputLiveChange"
+                                    change="onInputChange"
+                                    value="{
+                                        path: 'appModel>imageUrl',
+                                        type: 'sap.ui.model.type.String',
+                                        constraints: {
+                                            minLength: 3
+                                        }
+                                    }"
+                                />
+                                <Label text="{i18n>CategoryCreatedDateLabel}" />
+                                <DatePicker
+                                    id="newCategoryDateInput"
+                                    change="onDateInputValidate"
+                                    liveChange="onDateInputValidate"
+                                    value="{
+                                        path: 'appModel>createdDate',
+                                        type: 'sap.ui.model.type.Date',
+                                        formatOptions: {
+                                            source: {
+                                                pattern: 'yyyy-MM-dd'
+                                            },
+                                            pattern: 'yyyy-MM-dd'
+                                        }
+                                    }"
+                                />
+                            </form:SimpleForm>
+                        </WizardStep>
+                    </Wizard>
+                </content>
+                <footer>
+                    <OverflowToolbar>
+                        <Button
+                            icon="sap-icon://message-error"
+                            text="{= ${messages>/}.length }"
+                            visible="{= !!${messages>/}.length &amp;&amp; ${stateModel>/wizardErrValidateBtn}}"
+                            type="Reject"
+                            press="onValidationMessagePopoverOpen"
+                        />
+                        <ToolbarSpacer />
+                        <Button
+                            text="Cancel"
+                            press="onWizardCancel"
+                        />
+                    </OverflowToolbar>
+                </footer>
+            </Page>
+            <Page
+                id="wizardReviewPage"
+                showHeader="false"
+            >
+                <content>
+                    <form:SimpleForm
+                        title="{i18n>WizardReviewGenInfoTitle}"
+                        editable="false"
+                        layout="ResponsiveGridLayout"
+                    >
+                        <form:content>
+                            <Label text="{i18n>CategoryTitleLabel}" />
+                            <Text text="{appModel>title}" />
+                              <Label text="{i18n>CategorySubtitleLabel}" />
+                            <Text text="{appModel>subtitle}" />
+                            <Label text="{i18n>CategoryDescriptionLabel}" />
+                            <Text text="{appModel>description}" />
+                            <Link
+                                press="editStepOne"
+                                text="{i18n>EditBtnText}"
+                            />
+                        </form:content>
+                    </form:SimpleForm>
+                    <form:SimpleForm
+                        title="{i18n>WizardReviewBooksInfoTitle}"
+                        editable="false"
+                        layout="ResponsiveGridLayout"
+                    >
+                        <form:content>
+                            <core:Fragment fragmentName="pavel.kliuiko.view.fragments.WizardReviewBooksTable" />
+                            <Link
+                                press="editStepTwo"
+                                text="{i18n>EditBtnText}"
+                            />
+                        </form:content>
+                    </form:SimpleForm>
+                    <form:SimpleForm
+                        title="{i18n>WizardReviewAdditionalInfoTitle}"
+                        editable="false"
+                        layout="ResponsiveGridLayout"
+                    >
+                        <form:content>
+                            <Label text="{i18n>CategoryCreatedDateLabel}" />
+                            <Text text="{appModel>createdDate}" />
+                            <Label text="{i18n>CategoryImageLabel}" />
+                            <Text text="{appModel>imageUrl}" />
+                            <Link
+                                press="editStepThree"
+                                text="{i18n>EditBtnText}"
+                            />
+                        </form:content>
+                    </form:SimpleForm>
+                </content>
+                <footer>
+                    <Bar>
+                        <contentRight>
+                            <Button
+                                text="{i18n>SaveBtnText}"
+                                press="onWizardSave"
+                                type="Emphasized"
+                            />
+                            <Button
+                                text="{i18n>CancelBtnText}"
+                                press="onWizardCancel"
+                            />
+                        </contentRight>
+                    </Bar>
+                </footer>
+            </Page>
+        </pages>
+    </NavContainer>
+</mvc:View>

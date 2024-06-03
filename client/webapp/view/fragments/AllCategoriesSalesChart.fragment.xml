@@ -1,0 +1,30 @@
+<core:FragmentDefinition
+    xmlns="sap.suite.ui.microchart"
+    xmlns:m="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <m:VBox
+        width="5rem"
+        wrap="Wrap"
+    >
+        <m:Title text="{
+            path: 'appModel>/',
+            formatter: '.formatter.formatAllCategoriesChartTitle'
+        }" titleStyle="H6" />
+        <ComparisonMicroChart
+            busy="{stateModel>/busyIndicator}"
+            hideOnNoData="true"
+            size="L"
+            data="{appModel>/}"
+            shrinkable="true"
+        >
+            <data>
+                <ComparisonMicroChartData
+                    title="{appModel>title}"
+                    value="{= ${appModel>sales}.length ? ${appModel>sales/5/count} : 0}"
+                    color="Good"
+                />
+            </data>
+        </ComparisonMicroChart>
+    </m:VBox>
+</core:FragmentDefinition>

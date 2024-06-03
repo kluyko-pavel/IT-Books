@@ -1,0 +1,110 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.uxap"
+    xmlns:m="sap.m"
+    xmlns:core="sap.ui.core"
+    controllerName="pavel.kliuiko.controller.BookDetails"
+>
+    <ObjectPageLayout
+        showFooter="true"
+        upperCaseAnchorBar="false"
+    >
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <expandedHeading>
+                    <m:Title
+                        text="{appModel>title}"
+                        wrapping="true"
+                    />
+                </expandedHeading>
+                <snappedHeading>
+                    <m:Title
+                        text="{appModel>title}"
+                        wrapping="true"
+                    />
+                </snappedHeading>
+					<navigationActions>
+							<m:OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="onFullScreen"  tooltip="{i18n>FullScreenBtnTooltip}" visible="{stateModel>/bookDetailsFullScreenBtn}"/>
+							<m:OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="onExitFullScreen" tooltip="ExitFullScreenBtnTooltip" visible="{= !${stateModel>/bookDetailsFullScreenBtn}}"/>
+							<m:OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="onPageClose"  tooltip="{i18n>CloseMidColumnBtnTooltip}" visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
+						</navigationActions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+        <headerContent>
+            <m:FlexBox
+                wrap="Wrap"
+                fitContainer="true"
+            >
+                <m:Avatar
+                    src="{appModel>image}"
+                    displaySize="L"
+                    displayShape="Square"
+                    class="sapUiTinyMarginEnd"
+                />
+                <m:VBox
+                    justifyContent="Center"
+                    class="sapUiSmallMarginEnd"
+                >
+                    <m:Label
+                        showColon="true"
+                        text="{i18n>BookSubtitleLabel}"
+                    />
+                    <m:Text text="{appModel>subtitle}" />
+                </m:VBox>
+                <m:VBox
+                    justifyContent="Center"
+                    class="sapUiSmallMarginEnd"
+                >
+                    <m:Label
+                        showColon="true"
+                        text="{i18n>BookStatusLabel}"
+                    />
+                     <m:ObjectStatus
+                        text="{ path: 'appModel>status',
+                            formatter: '.formatter.formatStatusText'}"
+                        state="{
+                            path: 'appModel>status',
+                            formatter: '.formatter.formatStatusState'}"
+                    />
+                </m:VBox>
+                <m:VBox
+                    justifyContent="Center"
+                    class="sapUiSmallMarginEnd"
+                >
+                    <m:Label
+                        showColon="true"
+                        text="{i18n>BookDescriptionLabel}"
+                    />
+                    <m:Text text="{appModel>description}" />
+                </m:VBox>
+            </m:FlexBox>
+        </headerContent>
+
+        <sections>
+            <ObjectPageSection
+                titleUppercase="false"
+                title="{i18n>SalesChartTabTitle}"
+            >
+                <subSections>
+                    <ObjectPageSubSection>
+                        <core:Fragment
+                            fragmentName="pavel.kliuiko.view.fragments.BookSalesChart"
+                        />
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+			  <ObjectPageSection
+                titleUppercase="false"
+                title="{i18n>BookInfoTabTitle}"
+            >
+                <subSections>
+                    <ObjectPageSubSection>
+                        <core:Fragment
+                            fragmentName="pavel.kliuiko.view.fragments.BookInfo"
+                        />
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
+</mvc:View>

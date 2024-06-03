@@ -1,0 +1,62 @@
+<mvc:View
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.uxap"
+	xmlns:m="sap.m"
+	xmlns:core="sap.ui.core"
+	controllerName="pavel.kliuiko.controller.BookOrders"
+>
+	<ObjectPageLayout
+		showFooter="true"
+		upperCaseAnchorBar="false"
+	>
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle>
+				<expandedHeading>
+					<m:Title
+						text="{i18n>OrdersPageTitle}"
+						wrapping="true"
+					/>
+				</expandedHeading>
+				<snappedHeading>
+					<m:Title
+						text="{i18n>OrdersPageTitle}"
+						wrapping="true"
+					/>
+				</snappedHeading>
+				<navigationActions>
+					<m:OverflowToolbarButton
+						type="Transparent"
+						icon="sap-icon://full-screen"
+						press="onFullScreen"
+						tooltip="{i18n>FullScreenBtnTooltip}"
+						visible="{stateModel>/bookOrdersFullScreenBtn}"
+					/>
+					<m:OverflowToolbarButton
+						type="Transparent"
+						icon="sap-icon://exit-full-screen"
+						press="onExitFullScreen"
+						tooltip="ExitFullScreenBtnTooltip"
+						visible="{= !${stateModel>/bookOrdersFullScreenBtn}}"
+					/>
+					<m:OverflowToolbarButton
+						type="Transparent"
+						icon="sap-icon://decline"
+						press="onPageClose"
+						tooltip="{i18n>CloseMidColumnBtnTooltip}"
+					/>
+				</navigationActions>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+		<sections>
+			<ObjectPageSection
+				titleUppercase="false"
+			>
+				<subSections>
+					<ObjectPageSubSection>
+						<core:Fragment fragmentName="pavel.kliuiko.view.fragments.BookOrdersTable" />
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+	</ObjectPageLayout>
+</mvc:View>

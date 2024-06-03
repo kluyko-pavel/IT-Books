@@ -1,0 +1,125 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Table
+        id="idBookOrdersTable"
+        busy="{stateModel>/ordersBusyIndicator}"
+        sticky="ColumnHeaders,HeaderToolbar"
+        items="{appModel>/orders}"
+        updateFinished="onBookOrdersTableUpdateFinished"
+        width="auto"
+    >
+        <headerToolbar>
+            <Toolbar>
+                <Title text="{
+                    parts: ['appModel>/ordersCount'],
+                    formatter: '.formatter.formatBookOrdersTableTitle'
+                }" />
+                <ToolbarSpacer />
+                <HBox>
+                    <Button
+                        text="{i18n>CreateBtnText}"
+                        press="onOpenNewOrderDialogPress"
+                        type="Transparent"
+                    />
+                    <Button
+                        class="sapUiTinyMarginEnd"
+                        icon="sap-icon://filter"
+                        type="Transparent"
+                        press="onFilterOrdersBtnPress"
+                    />
+                    <Button
+                        icon="sap-icon://sort"
+                        type="Transparent"
+                        press="onSortOrdersBtnPress"
+                    />
+                </HBox>
+            </Toolbar>
+        </headerToolbar>
+        <infoToolbar>
+            <OverflowToolbar
+                id="ordersFilterBar"
+                visible="{stateModel>/ordersFilterBar}"
+            >
+                <Text id="ordersFilterLabel" />
+            </OverflowToolbar>
+        </infoToolbar>
+        <columns>
+            <Column hAlign="End">
+                <Text text="{i18n>OrdersTableIdColumnText}" />
+            </Column>
+            <Column
+                minScreenWidth="Small"
+                demandPopin="true"
+                hAlign="End"
+            >
+                <Text text="{i18n>OrdersTableIsbnColumnText}" />
+            </Column>
+            <Column
+                minScreenWidth="Tablet"
+                demandPopin="true"
+                hAlign="End"
+            >
+                <Text text="{i18n>OrdersTableClientColumnText}" />
+            </Column>
+            <Column
+                minScreenWidth="XXLarge"
+                demandPopin="true"
+                hAlign="End"
+            >
+                <Text text="{i18n>OrdersTablePriceColumnText}" />
+            </Column>
+            <Column
+                minScreenWidth="1250px"
+                demandPopin="true"
+            >
+                <Text text="{i18n>OrdersTableDateColumnText}" />
+            </Column>
+            <Column
+                minScreenWidth="1450px"
+                demandPopin="true"
+            >
+                <Text text="{i18n>OrdersTableStatusColumnText}" />
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <ObjectIdentifier text="{appModel>_id}" />
+                    <Link
+                        text="{appModel>isbn13}"
+                        tooltip="{appModel>isbn13}"
+                        press="onBookIsbnPress"
+                    />
+                    <Text
+                        text="{appModel>client}"
+                        tooltip="{appModel>client}"
+                        maxLines="1"
+                    />
+                    <ObjectNumber
+                        number="{appModel>price}"
+                        unit="BYN"
+                    />
+                    <Text
+                        text="{appModel>date}"
+                        tooltip="{appModel>date}"
+                        maxLines="1"
+                    />
+                    <Select
+                        id="bookOrderStatusInput"
+                        forceSelection="false"
+                        items="{appModel>/orderStatuses}"
+                        change="onOrderStatusChange"
+                        selectedKey="{appModel>status}"
+                    >
+                        <core:Item
+                            key="{appModel>statusKey}"
+                            text="{appModel>statusText}"
+                        />
+                    </Select>
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+</core:FragmentDefinition>

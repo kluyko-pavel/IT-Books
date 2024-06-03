@@ -1,0 +1,13 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm="onCategoriesSortDialogConfirm">
+		<sortItems>
+			<ViewSettingsItem text="{i18n>CategorySorterText}" key="title" selected="true" />
+			<ViewSettingsItem text="{i18n>SubtitleSorterText}" key="subtitle" />
+			<ViewSettingsItem text="{i18n>DescriptionSorterText}" key="description" />
+			<ViewSettingsItem text="{i18n>CreatedDateSorterText}" key="createdDate" />
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,235 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        title="{i18n>EditBookDialogTitle}"
+        afterClose="onAfterBookDialogClose"
+        contentWidth="250px"
+    >
+        <f:SimpleForm
+            layout="ResponsiveGridLayout"
+            labelSpanXL="12"
+            emptySpanXL="0"
+            labelSpanL="12"
+            emptySpanL="0"
+            labelSpanM="12"
+            emptySpanM="0"
+            labelSpanS="12"
+            emptySpanS="0"
+        >
+            <f:content>
+                <Label
+                    text="{i18n>BookTitleLabel}"
+                    required="true"
+                />
+                <Input
+                    id="editBookTitleInput"
+                    fieldGroupIds="editBookInputs"
+                    liveChange="onInputLiveChange"
+                    change="onInputChange"
+                    value="{
+						path: 'appModel>title',
+						type: 'sap.ui.model.type.String',
+						constraints: {
+							minLength: 3,
+							maxLength: 40
+						}
+					}"
+                />
+                <Label
+                    text="{i18n>BookSubtitleLabel}"
+                    required="true"
+                />
+                <Input
+                    id="editBookSubtitleInput"
+                    fieldGroupIds="editBookInputs"
+                    liveChange="onInputLiveChange"
+                    change="onInputChange"
+                    value="{
+						path: 'appModel>subtitle',
+						type: 'sap.ui.model.type.String',
+						constraints: {
+							minLength: 3,
+							maxLength: 40
+						}
+					}"
+                />
+                <Label
+                    text="{i18n>BookAuthorsLabel}"
+                    required="true"
+                />
+                <Input
+                    id="editBookAuthorsInput"
+                    fieldGroupIds="editBookInputs"
+                    liveChange="onInputLiveChange"
+                    change="onInputChange"
+                    value="{
+						path: 'appModel>authors',
+						type: 'sap.ui.model.type.String',
+						constraints: {
+							minLength: 3,
+							maxLength: 40
+						}
+					}"
+                />
+                <Label
+                    text="{i18n>BookPublisherLabel}"
+                    required="true"
+                />
+                <Input
+                    id="editBookPublisherInput"
+                    fieldGroupIds="editBookInputs"
+                    liveChange="onInputLiveChange"
+                    change="onInputChange"
+                    value="{
+						path: 'appModel>publisher',
+						type: 'sap.ui.model.type.String',
+						constraints: {
+							minLength: 3,
+							maxLength: 40
+						}
+					}"
+                />
+                <Label
+                    text="{i18n>BookIsbnLabel}"
+                    required="true"
+                />
+                <Input
+                    id="editBookIsbnInput"
+                    fieldGroupIds="editBookInputs"
+                    liveChange="onInputLiveChange"
+                    change="onInputChange"
+                    value="{
+						path: 'appModel>isbn13',
+						type: 'sap.ui.model.type.String',
+						constraints: {
+							minLength: 13,
+							maxLength: 13
+						}
+					}"
+                />
+                <Label
+                    text="{i18n>BookPagesLabel}"
+                    required="true"
+                />
+                <Input
+                    id="editBookPagesInput"
+                    fieldGroupIds="editBookInputs"
+                    liveChange="onInputLiveChange"
+                    change="onInputChange"
+                    value="{
+						path: 'appModel>pages',
+						type: 'sap.ui.model.type.Integer',
+						constraints: {
+							minimum: 3,
+							maximum: 10000
+						}
+					}"
+                />
+                <Label text="{i18n>BookDateLabel}" />
+                <DatePicker
+                    id="editBookDateInput"
+                    change="onDateInputValidate"
+                    liveChange="onDateInputValidate"
+                    value="{
+						path: 'appModel>year',
+						type: 'sap.ui.model.type.Date',
+						 formatOptions: {
+                                        source: {
+                                            pattern: 'yyyy-MM-dd'
+                                        },
+                                        pattern: 'yyyy-MM-dd'
+                                        }
+					}"
+                />
+                <Label text="{i18n>BookRatingLabel}" />
+                <RatingIndicator value="{appModel>rating}" />
+                <Label
+                    text="{i18n>BookDescriptionLabel}"
+                    required="true"
+                />
+                <TextArea
+                    id="editBookDescriptionInput"
+                    fieldGroupIds="editBookInputs"
+                    liveChange="onInputLiveChange"
+                    change="onInputChange"
+                    value="{
+						path: 'appModel>description',
+						type: 'sap.ui.model.type.String',
+						constraints: {
+							minLength: 3,
+							maxLength: 150
+						}
+					}"
+                />
+                <Label
+                    text="{i18n>BookPriceLabel}"
+                    required="true"
+                />
+                <Input
+                    id="editBookPriceInput"
+                    fieldGroupIds="editBookInputs"
+                    liveChange="onInputLiveChange"
+                    change="onInputChange"
+                    value="{
+						path: 'appModel>price',
+						type: 'sap.ui.model.type.Float',
+						constraints: {
+							minimum: 1,
+							maximum: 1000
+						}
+					}"
+                />
+                <Label text="{i18n>BookImageLabel}" />
+                <Input
+                    id="editBookImageInput"
+                    liveChange="onInputLiveChange"
+                    change="onInputChange"
+                    value="{
+						path: 'appModel>image',
+						type: 'sap.ui.model.type.String',
+						constraints: {
+							minLength: 3,
+							maxLength: 40
+						}
+					}"
+                />
+                <Label
+                    text="{i18n>BookStatusLabel}"
+                    required="true"
+                />
+                <Select
+                    id="editBookStatusInput"
+                    forceSelection="false"
+                    items="{appModel>/bookStatuses}"
+                    selectedKey="{appModel>status}"
+                >
+                    <core:Item
+                        key="{appModel>statusKey}"
+                        text="{appModel>statusText}"
+                    />
+                </Select>
+            </f:content>
+        </f:SimpleForm>
+        <buttons>
+            <Button
+                icon="sap-icon://message-error"
+                text="{= ${messages>/}.length }"
+                visible="{= ${messages>/}.length > 0 }"
+                type="Reject"
+                press="onValidationMessagePopoverOpen"
+            />
+            <Button
+                text="{i18n>SaveBtnText}"
+                type="Emphasized"
+                press="onSaveBookPress"
+            />
+            <Button
+                text="{i18n>CancelBtnText}"
+                press="onEditBookDialogCancelPress"
+            />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,104 @@
+<mvc:View
+    xmlns="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    controllerName="pavel.kliuiko.controller.CategoriesList"
+>
+    <f:DynamicPage
+        fitContent="true"
+        class="sapUiNoContentPadding"
+    >
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{
+                        parts: ['appModel>/categoriesCount'],
+                        formatter: '.formatter.formatCategoriesListViewTitle'
+                    }" />
+                </f:heading>
+                <f:actions>
+                    <Button
+                        text="{i18n>OrdersBtnText}"
+                        press="onBookOrdersBtnPress"
+                        type="Accept"
+                    />
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader>
+                <core:Fragment fragmentName="pavel.kliuiko.view.fragments.AllCategoriesSalesChart" />
+                <fb:FilterBar
+                    id="filterBar"
+                    persistencyKey="myPersKey"
+                    useToolbar="false"
+                    clear="onFiltersClear"
+                    showClearOnFB="true"
+                    showGoOnFB="false"
+                >
+                    <fb:filterGroupItems>
+                        <fb:FilterGroupItem
+                            name="title"
+                            label="{i18n>CategorySearchFieldLabel}"
+                            groupName="CategoryFilters"
+                            visibleInFilterBar="true"
+                        >
+                            <fb:control>
+                                <SearchField
+                                    id="idCategorySearchField"
+                                    change="onCategoriesSearch"
+                                />
+                            </fb:control>
+                        </fb:FilterGroupItem>
+                        <fb:FilterGroupItem
+                            name="createdDate"
+                            label="{i18n>CategoryCreatedDateLabel}"
+                            groupName="CategoryFilters"
+                            visibleInFilterBar="true"
+                        >
+                            <fb:control>
+                                <DatePicker
+                                    id="categoryDateInput"
+                                    change="onCategoriesSearch"
+                                />
+                            </fb:control>
+                        </fb:FilterGroupItem>
+                    </fb:filterGroupItems>
+                </fb:FilterBar>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <VBox fitContainer="true">
+                <OverflowToolbar>
+                    <ToolbarSpacer />
+                    <OverflowToolbarButton
+                        icon="sap-icon://add"
+                        type="Transparent"
+                        press="onOpenCreateCategoryWizardPress"
+                    />
+                    <OverflowToolbarButton
+                        icon="sap-icon://sort"
+                        type="Transparent"
+                        press="onSortCategoriesBtnPress"
+                    />
+                </OverflowToolbar>
+                <List
+                    id="idCategoriesList"
+                    items="{appModel>/}"
+                    updateFinished="onCategoriesListUpdateFinished"
+                    busy="{stateModel>/busyIndicator}"
+                >
+                    <StandardListItem
+                        press="onListItemPress"
+                        title="{appModel>title}"
+                        description="{appModel>description}"
+                        info="{appModel>createdDate}"
+                        type="Navigation"
+                    />
+                </List>
+            </VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

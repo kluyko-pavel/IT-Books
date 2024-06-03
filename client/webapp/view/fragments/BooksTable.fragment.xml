@@ -1,0 +1,173 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Table
+        id="idBooksTable"
+        busy="{stateModel>/busyIndicator}"
+        sticky="ColumnHeaders"
+        items="{appModel>books}"
+        selectionChange="onCheckSelectedBooks"
+        updateFinished="onBooksTableUpdateFinished"
+        width="auto"
+        mode="{= ${stateModel>/editMode} || ${stateModel>/createMode} ? 'MultiSelect' : 'None'}"
+    >
+        <headerToolbar>
+            <Toolbar>
+                <Title
+                    text="{
+                    parts: ['appModel>/booksCount'],
+                    formatter: '.formatter.formatBooksTableTitle'
+                }"
+                />
+                <ToolbarSpacer />
+                <HBox>
+                    <Button
+                        visible="{= ${stateModel>/editMode} || ${stateModel>/createMode}}"
+                        class="sapUiTinyMarginEnd"
+                        enabled="{stateModel>/booksDeleteBtn}"
+                        text="{i18n>DeleteBtnText}"
+                        press="onDeleteSelectedBooks"
+                        type="Transparent"
+                    />
+                    <Button
+                        visible="{= ${stateModel>/editMode} || ${stateModel>/createMode}}"
+                        text="{i18n>CreateBtnText}"
+                        press="onOpenNewBookDialogPress"
+                        type="Transparent"
+                    />
+                    <Button
+                        class="sapUiTinyMarginEnd"
+                        icon="sap-icon://filter"
+                        type="Transparent"
+                        press="onFilterBooksBtnPress"
+                    />
+                    <Button
+                        icon="sap-icon://sort"
+                        type="Transparent"
+                        press="onSortBooksBtnPress"
+                    />
+                </HBox>
+            </Toolbar>
+        </headerToolbar>
+        <infoToolbar>
+            <OverflowToolbar
+                id="booksFilterBar"
+                visible="{stateModel>/booksFilterBar}"
+            >
+                <Text id="booksFilterLabel" />
+            </OverflowToolbar>
+        </infoToolbar>
+        <columns>
+            <Column>
+                <Text text="{i18n>BooksTableTitleColumnText}" />
+            </Column>
+            <Column
+                minScreenWidth="Small"
+                demandPopin="true"
+                hAlign="End"
+            >
+                <Text text="{i18n>BooksTableIsbnColumnText}" />
+            </Column>
+            <Column
+                minScreenWidth="Tablet"
+                demandPopin="true"
+                hAlign="End"
+            >
+                <Text text="{i18n>BooksTablePriceColumnText}" />
+            </Column>
+            <Column
+                minScreenWidth="XXLarge"
+                demandPopin="true"
+            >
+                <Text text="{i18n>BooksTableAuthorsColumnText}" />
+            </Column>
+            <Column
+                minScreenWidth="1250px"
+                demandPopin="true"
+            >
+                <Text text="{i18n>BooksTablePublisherColumnText}" />
+            </Column>
+            <Column
+                minScreenWidth="1450px"
+                demandPopin="true"
+            >
+                <Text text="{i18n>BooksTableDateColumnText}" />
+            </Column>
+            <Column
+                minScreenWidth="1500px"
+                demandPopin="true"
+                hAlign="End"
+            >
+                <Text text="{i18n>BooksTableRatingColumnText}" />
+            </Column>
+            <Column
+                minScreenWidth="1500px"
+                demandPopin="true"
+                hAlign="End"
+            >
+                <Text text="{i18n>BooksTablePagesColumnText}" />
+            </Column>
+            <Column hAlign="End">
+                <Text text="{i18n>BooksTableStatusColumnText}" />
+            </Column>
+            <Column
+                hAlign="End"
+                visible="{= ${stateModel>/editMode} || ${stateModel>/createMode}}"
+            />
+        </columns>
+        <items>
+            <ColumnListItem type="{= ${stateModel>/createMode} || ${stateModel>/editMode} ? 'Inactive' : 'Navigation'}" press="onBookTableItemPress">
+                <cells>
+                    <ObjectIdentifier title="{appModel>title}" />
+                    <Text
+                        text="{appModel>isbn13}"
+                        tooltip="{appModel>isbn13}"
+                        maxLines="1"
+                    />
+                    <ObjectNumber
+                        number="{appModel>price}"
+                        unit="BYN"
+                    />
+                    <Text
+                        text="{appModel>authors}"
+                        tooltip="{appModel>authors}"
+                        maxLines="3"
+                    />
+                    <Text
+                        text="{appModel>publisher}"
+                        tooltip="{appModel>publisher}"
+                        maxLines="1"
+                    />
+                    <Text
+                        text="{appModel>year}"
+                        tooltip="{appModel>year}"
+                        maxLines="1"
+                    />
+                    <RatingIndicator
+                        editable="false"
+                        value="{appModel>rating}"
+                    />
+                    <Text
+                        text="{appModel>pages}"
+                        tooltip="{appModel>psges}"
+                        maxLines="1"
+                    />
+                    <ObjectStatus
+                        text="{ path: 'appModel>status',
+                            formatter: '.formatter.formatStatusText'}"
+                        state="{
+                            path: 'appModel>status',
+                            formatter: '.formatter.formatStatusState'}"
+                    />
+                    <Button
+                        visible="{= ${stateModel>/editMode} || ${stateModel>/createMode}}"
+                        icon="sap-icon://edit"
+                        type="Transparent"
+                        press="onOpenEditBookDialogPress"
+                    />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+</core:FragmentDefinition>

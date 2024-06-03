@@ -1,0 +1,22 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <ViewSettingsDialog confirm="onOrdersSortDialogConfirm">
+        <sortItems>
+            <ViewSettingsItem
+                text="{i18n>IdSorterText}"
+                key="_id"
+                selected="true"
+            />
+              <ViewSettingsItem
+                text="{i18n>PriceSorterText}"
+                key="price"
+            />
+              <ViewSettingsItem
+                text="{i18n>CreatedDateSorterText}"
+                key="date"
+            />
+        </sortItems>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>

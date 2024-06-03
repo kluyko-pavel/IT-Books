@@ -1,0 +1,46 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <ViewSettingsDialog confirm="onBooksSortDialogConfirm">
+        <sortItems>
+            <ViewSettingsItem
+                text="{i18n>BookSorterText}"
+                key="title"
+                selected="true"
+            />
+              <ViewSettingsItem
+                text="{i18n>SubtitleSorterText}"
+                key="subtitle"
+            />
+             <ViewSettingsItem
+                text="{i18n>AuthorsSorterText}"
+                key="authors"
+            />
+              <ViewSettingsItem
+                text="{i18n>PublisherSorterText}"
+                key="publisher"
+            />
+              <ViewSettingsItem
+                text="{i18n>IsbnSorterText}"
+                key="isbn13"
+            />
+              <ViewSettingsItem
+                text="{i18n>PagesSorterText}"
+                key="pages"
+            />
+             <ViewSettingsItem
+                text="{i18n>PublishedDateSorterText}"
+                key="year"
+            />
+             <ViewSettingsItem
+                text="{i18n>RatingSorterText}"
+                key="rating"
+            />
+            <ViewSettingsItem
+                text="{i18n>PriceSorterText}"
+                key="price"
+            />
+        </sortItems>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>
