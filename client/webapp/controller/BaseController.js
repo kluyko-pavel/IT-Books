@@ -20,8 +20,8 @@ sap.ui.define(
 		"use strict";
 		return Controller.extend("pavel.kliuiko.controller.BaseController", {
 			formatter: formatter,
-			apiUrl: "http://localhost:5000/api/booksCategories/",
-			apiOrdersUrl: "http://localhost:5000/api/orders/",
+			apiUrl: "https://it-books.onrender.com/api/booksCategories/",
+			apiOrdersUrl: "https://it-books.onrender.com/api/orders/",
 
 			/**
 			 * Get text from resource bundle.

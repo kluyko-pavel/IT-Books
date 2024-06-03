@@ -1,0 +1,17 @@
+{
+  "xsappname": "pavelkliuiko",
+  "tenant-mode": "shared",
+  "description": "Security profile of called application",
+  "scopes": [{
+		"name": "$XSAPPNAME.Display",
+		"description": "display"
+	}],
+	"role-templates": [{
+		"name": "BooksViewer",
+		"description": "View all books",
+		"default-role-name": "Viewer: Authorized to view all books",
+		"scope-references": [
+			"$XSAPPNAME.Display"
+		]
+	}]
+}

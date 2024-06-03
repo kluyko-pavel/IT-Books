@@ -1,121 +1,150 @@
 {
-	"sap.app": {
-		"id": "pavel.kliuiko",
-		"type": "application",
-		"i18n": "i18n/i18n.properties",
-		"title": "{{appTitle}}",
-		"description": "{{appDescription}}",
-		"applicationVersion": {
-			"version": "1.0.0"
-		}
-	},
-	"sap.ui": {
-		"deviceTypes": {
-			"desktop": true,
-			"tablet": true,
-			"phone": true
-		},
-		"supportedThemes": ["sap_horizon"]
-	},
-	"sap.ui5": {
-		"rootView": "pavel.kliuiko.view.App",
-		"routing": {
-			"config": {
-				"routerClass": "sap.m.routing.Router",
-				"type": "View",
-				"viewType": "XML",
-				"path": "pavel.kliuiko.view",
-				"controlId": "flexibleColumnLayout",
-				"transition": "slide",
-				"bypassed": {
-					"target": ["notFound"]
-				},
-				"async": true
-			},
-			"routes": [
-				{
-					"pattern": ":layout:",
-					"name": "categoriesList",
-					"target": [
-						"categoriesList",
-						"bookOrders",
-						"categoryWizard",
-						"categoryDetails"
-					]
-				},
-				{
-					"pattern": "categoryDetails/{category}/{layout}",
-					"name": "categoryDetails",
-					"target": ["categoriesList", "categoryDetails"]
-				},
-				{
-					"pattern": "categoryWizard/{category}/{mode}/{layout}",
-					"name": "categoryWizard",
-					"target": ["categoriesList", "categoryWizard"]
-				},
-				{
-					"pattern": "bookOrders/{layout}",
-					"name": "bookOrders",
-					"target": ["categoriesList", "bookOrders"]
-				},
-				{
-					"pattern": "categoryDetails/{category}/bookDetails/{book}/{layout}",
-					"name": "bookDetails",
-					"target": [
-						"categoriesList",
-						"categoryDetails",
-						"bookDetails"
-					]
-				}
-			],
-			"targets": {
-				"categoriesList": {
-					"name": "CategoriesList",
-					"controlAggregation": "beginColumnPages"
-				},
-				"categoryDetails": {
-					"name": "CategoryDetails",
-					"controlAggregation": "midColumnPages",
-					"clearControlAggregation": true
-				},
-				"categoryWizard": {
-					"name": "CategoryWizard",
-					"controlAggregation": "midColumnPages",
-					"clearControlAggregation": true
-				},
-				"bookOrders": {
-					"name": "BookOrders",
-					"controlAggregation": "midColumnPages",
-					"clearControlAggregation": true
-				},
-				"bookDetails": {
-					"name": "BookDetails",
-					"controlAggregation": "endColumnPages",
-					"clearControlAggregation": true
-				}
-			}
-		},
-
-		"dependencies": {
-			"minUI5Version": "1.120.0",
-			"libs": {
-				"sap.m": {}
-			}
-		},
-		"models": {
-			"i18n": {
-				"type": "sap.ui.model.resource.ResourceModel",
-				"settings": {
-					"bundleName": "pavel.kliuiko.i18n.i18n"
-				}
-			},
-			"appModel": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "http://localhost:5000/api/booksCategories"
-			},
-			"stateModel": {
-				"type": "sap.ui.model.json.JSONModel"
-			}
-		}
-	}
+  "sap.app": {
+    "id": "pavel.kliuiko",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "Books-managing": {
+          "semanticObject": "Books",
+          "action": "managing",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    },
+    "supportedThemes": [
+      "sap_horizon"
+    ]
+  },
+  "sap.ui5": {
+    "rootView": "pavel.kliuiko.view.App",
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "type": "View",
+        "viewType": "XML",
+        "path": "pavel.kliuiko.view",
+        "controlId": "flexibleColumnLayout",
+        "transition": "slide",
+        "bypassed": {
+          "target": [
+            "notFound"
+          ]
+        },
+        "async": true
+      },
+      "routes": [
+        {
+          "pattern": ":layout:",
+          "name": "categoriesList",
+          "target": [
+            "categoriesList",
+            "bookOrders",
+            "categoryWizard",
+            "categoryDetails"
+          ]
+        },
+        {
+          "pattern": "categoryDetails/{category}/{layout}",
+          "name": "categoryDetails",
+          "target": [
+            "categoriesList",
+            "categoryDetails"
+          ]
+        },
+        {
+          "pattern": "categoryWizard/{category}/{mode}/{layout}",
+          "name": "categoryWizard",
+          "target": [
+            "categoriesList",
+            "categoryWizard"
+          ]
+        },
+        {
+          "pattern": "bookOrders/{layout}",
+          "name": "bookOrders",
+          "target": [
+            "categoriesList",
+            "bookOrders"
+          ]
+        },
+        {
+          "pattern": "categoryDetails/{category}/bookDetails/{book}/{layout}",
+          "name": "bookDetails",
+          "target": [
+            "categoriesList",
+            "categoryDetails",
+            "bookDetails"
+          ]
+        }
+      ],
+      "targets": {
+        "categoriesList": {
+          "name": "CategoriesList",
+          "controlAggregation": "beginColumnPages"
+        },
+        "categoryDetails": {
+          "name": "CategoryDetails",
+          "controlAggregation": "midColumnPages",
+          "clearControlAggregation": true
+        },
+        "categoryWizard": {
+          "name": "CategoryWizard",
+          "controlAggregation": "midColumnPages",
+          "clearControlAggregation": true
+        },
+        "bookOrders": {
+          "name": "BookOrders",
+          "controlAggregation": "midColumnPages",
+          "clearControlAggregation": true
+        },
+        "bookDetails": {
+          "name": "BookDetails",
+          "controlAggregation": "endColumnPages",
+          "clearControlAggregation": true
+        }
+      }
+    },
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.m": {}
+      }
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "pavel.kliuiko.i18n.i18n"
+        }
+      },
+      "appModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "http://localhost:5000/api/booksCategories"
+      },
+      "stateModel": {
+        "type": "sap.ui.model.json.JSONModel"
+      }
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "pavelkliuiko"
+  }
 }
